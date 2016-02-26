@@ -56,7 +56,13 @@ echo -n "python_app: "; docker run -d --name python_app \
 	--link python_mysql:python_mysql --link python_postgresql:python_postgresql \
 	--link php_app:php_app --link nodejs_app:nodejs_app -p 9000:9000 appdynamics/python-app:latest
 
-echo -n "python_siege: "; docker run -d --name python_siege -e BUNDY_TIER=${SIEGE_URL} -e PROCUREMENT_URL=${PROCUREMENT_URL}\
-	--link python_app:python_app appdynamics/python-siege:latest
+#echo -n "python_siege: "; docker run -d --name python_siege -e BUNDY_TIER=${SIEGE_URL} -e PROCUREMENT_URL=${PROCUREMENT_URL}\
+#	--link python_app:python_app appdynamics/python-siege:latest
+
+echo -n "Starting java_app"; docker run -d --name java_app -p 8080:8080 \
+        -e ACCOUNT_NAME=${ACCOUNT_NAME} -e ACCESS_KEY=${ACCESS_KEY} -e SSL=${SSL} \
+        -e APP_NAME=${PP_APP_NAME} -e JAVA_TIER_NAME=${JAVA_TIER_NAME} -e JAVA_NODE_NAME=${JAVA_NODE_NAME} \
+        -e CONTROLLER=${CONTR_HOST} -e APPD_PORT=${CONTR_PORT} \
+        appdynamics/java-app:${VERSION}
 
 exit 0
