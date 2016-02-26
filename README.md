@@ -24,7 +24,7 @@ PHP Tier needs to run first. Then Node.js app. Last is Python app.
 
 ## Run
 
-- To run Partner Portal App:
+- To run MixApp:
 ```
 ./start.sh <tag_name> <App_Name>
 ```

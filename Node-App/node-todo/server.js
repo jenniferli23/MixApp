@@ -13,7 +13,7 @@ require("appdynamics").profile({
 var express = require('express');
 var app = express(); 						// create our app w/ express
 var mongoose = require('mongoose'); 				// mongoose for mongodb
-var port = process.env.PORT || 3000; 				// set the port
+var port = process.env.PORT || 3030; 				// set the port
 var database = require('./config/database'); 			// load the database config
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
@@ -32,6 +32,11 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 // routes ======================================================================
 require('./app/routes.js')(app);
 
+// crossapp ======================================================================
+app.get('/crossapp/', require('./app/crossapp.js').crossApp);
+app.get('/crosspython/', require('./app/crosspython.js').crossApp);
+app.get('/crossjava/', require('./app/crossjava.js').crossApp);
+app.get('/crossphp/', require('./app/crossphp.js').crossApp);
 
 // listen (start app with node server.js) ======================================
 app.listen(port);

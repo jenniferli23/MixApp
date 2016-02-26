@@ -17,7 +17,7 @@ ADD /node-todo /node-todo
 
 # Install app dependencies
 
-RUN cd /node-todo && npm install appdynamics@4.1.0
+RUN cd /node-todo && npm install appdynamics@next
 RUN cd /node-todo && npm install express
 RUN cd /node-todo && npm install request
 RUN cd /node-todo && npm install mongodb

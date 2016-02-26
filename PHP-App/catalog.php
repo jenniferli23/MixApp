@@ -1,5 +1,5 @@
 <?php
-$service_url = 'http://nodejs_app:3000/';
+$service_url = 'http://python_app:9000/';
 $curl = curl_init($service_url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $curl_response = curl_exec($curl);
