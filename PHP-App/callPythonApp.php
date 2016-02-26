@@ -1,5 +1,5 @@
 <?php
-$service_url = 'http://192.168.99.100:9000/wave/abc';
+$service_url = 'http://python_app:9000/wave/abc';
 $curl = curl_init($service_url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $curl_response = curl_exec($curl);
