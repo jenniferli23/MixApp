@@ -15,16 +15,20 @@ RUN yum -y install bzip2
 RUN yum -y install tar
 RUN yum -y install which
 RUN yum -y install curl
+RUN yum -y install java-1.7.0-openjdk-devel
 
 # Use Apache Worker MPM
 ENV HTTPD_24 /opt/rh/httpd24/root/etc/httpd
 ADD 00-mpm.conf ${HTTPD_24}/conf.modules.d/00-mpm.conf
 
 # Add files in place
-ADD info.php /var/www/html/
-ADD catalog.php /var/www/html/
+ADD *.php /var/www/html/
 
 RUN apachectl start
+
+# Environment settings for startup scripts
+ADD env.sh /
+RUN chmod +x /env.sh
 
 # Install bits and setup install for AppD Agent
 ADD appdynamics-php-agent-x64-linux-tar-self-service.zip /var/www/
@@ -32,6 +36,13 @@ RUN unzip -o -d /var/www/ /var/www/appdynamics-php-agent-x64-linux-tar-self-serv
 RUN tar -xvjf /var/www/appdynamics-php-agent/*.tar.bz2 -C /var/www/
 RUN chmod 777 /var/www/appdynamics-php-agent/logs
 RUN chmod -R 755 /var/www/appdynamics-php-agent/php
+
+# Machine Agent
+ADD MachineAgent.zip /
+RUN unzip -q /MachineAgent.zip -d /machine-agent;rm MachineAgent.zip
+
+ADD runMachineAgent.sh /
+RUN chmod +x /runMachineAgent.sh
 
 # Add Env script
 ADD /env.sh /appdynamics/

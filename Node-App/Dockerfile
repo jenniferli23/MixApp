@@ -10,6 +10,8 @@ RUN yum install -y npm --enablerepo=epel
 RUN npm config set registry http://registry.npmjs.org/
 RUN yum install -y vim
 RUN yum install -y git
+RUN yum install -y unzip
+RUN yum -y install java-1.7.0-openjdk-devel
 
 # Add app source
 RUN mkdir /node-todo
@@ -23,6 +25,13 @@ RUN cd /node-todo && npm install request
 RUN cd /node-todo && npm install mongodb
 RUN cd /node-todo && npm install mongoose
 RUN cd /node-todo && npm install socket.io
+
+# Machine Agent
+ADD MachineAgent.zip /
+RUN unzip -q /MachineAgent.zip -d /machine-agent;rm MachineAgent.zip
+
+ADD runMachineAgent.sh /
+RUN chmod +x /runMachineAgent.sh
 
 # Install and start mongo
 ADD /mongodb-org-3.0.repo /etc/yum.repos.d/

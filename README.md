@@ -29,3 +29,8 @@ PHP Tier needs to run first. Then Node.js app. Last is Python app.
 ./start.sh <tag_name> <App_Name>
 ```
 
+## Load
+
+- To generate load(Load is generated using a java file so it require >= jdk1.7 installed in the host machine):
+```
+./runLoad.sh

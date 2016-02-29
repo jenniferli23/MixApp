@@ -39,6 +39,9 @@ RUN unzip -q /AppServerAgent.zip -d ${CATALINA_HOME}/appagent;rm AppServerAgent.
 ADD MachineAgent.zip /
 RUN unzip -q /MachineAgent.zip -d /machine-agent;rm MachineAgent.zip
 
+ADD runMachineAgent.sh /
+RUN chmod +x /runMachineAgent.sh
+
 ADD TechStack.war ${CATALINA_HOME}/webapps/
 
 # Startup scripts
